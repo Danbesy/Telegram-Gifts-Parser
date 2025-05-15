@@ -333,29 +333,29 @@ async def get_statistics(db_connections):
             "total_unique_symbols": 0,
         }
     
-async def get_owner_from_db_and_parse(db_connection, session, gift_name, number):
+# async def get_owner_from_db_and_parse(db_connection, session, gift_name, number):
     
-    query = f"SELECT name FROM sqlite_master WHERE type='table' AND name='{gift_name}'"
-    async with db_connection.execute(query) as cursor:
-        table_exists = await cursor.fetchone()
+    # query = f"SELECT name FROM sqlite_master WHERE type='table' AND name='{gift_name}'"
+    # async with db_connection.execute(query) as cursor:
+        # table_exists = await cursor.fetchone()
 
-    if not table_exists:
-        logging.error(f"Таблица с именем {gift_name} не существует.")
-        return None
+    # if not table_exists:
+        # logging.error(f"Таблица с именем {gift_name} не существует.")
+        # return None
 
-    query = f"SELECT number FROM {gift_name} WHERE number = ?"
-    try:
-        async with db_connection.execute(query, (number,)) as cursor:
-            rows = await cursor.fetchall()
+    # query = f"SELECT number FROM {gift_name} WHERE number = ?"
+    # try:
+        # async with db_connection.execute(query, (number,)) as cursor:
+            # rows = await cursor.fetchall()
 
-        if rows:
-            gift_number = rows[0][0]
-            from handlers import parse_owner
-            number, owner_nick = await parse_owner(session, gift_name, gift_number)
-            return owner_nick
-        else:
-            return None
+        # if rows:
+            # gift_number = rows[0][0]
+            # from handlers import parse_owner
+            # number, owner_nick = await parse_owner(session, gift_name, gift_number)
+            # return owner_nick
+        # else:
+            # return None
 
-    except Exception as e:
-        logging.error(f"Ошибка при запросе для {gift_name}, {number}: {e}")
-        return None
+    # except Exception as e:
+        # logging.error(f"Ошибка при запросе для {gift_name}, {number}: {e}")
+        # return None
