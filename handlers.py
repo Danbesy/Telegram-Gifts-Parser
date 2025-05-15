@@ -823,31 +823,31 @@ async def parse_page(session, gift_name, number):
 
     return (number, model_text, model_percent, backdrop_text, backdrop_percent, symbol_text, symbol_percent)
 
-async def parse_owner(session, gift_name, number):
-    url = f"https://t.me/nft/{gift_name}-{number}"
-    logging.info(f"Пытаемся получить HTML для {gift_name}-{number} по URL: {url}")
+# async def parse_owner(session, gift_name, number):
+    # url = f"https://t.me/nft/{gift_name}-{number}"
+    # logging.info(f"Пытаемся получить HTML для {gift_name}-{number} по URL: {url}")
     
-    html = await safe_request(session, url, HEADERS)
+    # html = await safe_request(session, url, HEADERS)
     
-    if not html:
-        logging.info(f"Не удалось получить HTML для {gift_name}-{number} по URL: {url}")
-        return number, None
+    # if not html:
+        # logging.info(f"Не удалось получить HTML для {gift_name}-{number} по URL: {url}")
+        # return number, None
 
-    logging.info(f"HTML получен для {gift_name}-{number}, начинаем парсинг...")
-    soup = BeautifulSoup(html, "html.parser")
+    # logging.info(f"HTML получен для {gift_name}-{number}, начинаем парсинг...")
+    # soup = BeautifulSoup(html, "html.parser")
 
-    owner_element = soup.find("th", string="Owner")
-    if owner_element:
-        owner_td = owner_element.find_next_sibling("td")
-        if owner_td:
-            owner_a = owner_td.find("a", href=True)
-            if owner_a and "https://t.me/" in owner_a["href"]:
-                owner_nick = owner_a["href"].split("/")[-1]
-                logging.info(f"Владелец найден для {gift_name}-{number}: {owner_nick}")
-                return number, owner_nick
+    # owner_element = soup.find("th", string="Owner")
+    # if owner_element:
+        # owner_td = owner_element.find_next_sibling("td")
+       #  if owner_td:
+            # owner_a = owner_td.find("a", href=True)
+            # if owner_a and "https://t.me/" in owner_a["href"]:
+                # owner_nick = owner_a["href"].split("/")[-1]
+                # logging.info(f"Владелец найден для {gift_name}-{number}: {owner_nick}")
+                # return number, owner_nick
 
-    logging.info(f"Владелец не найден для {gift_name}-{number}")
-    return number, None
+    # logging.info(f"Владелец не найден для {gift_name}-{number}")
+    # return number, None
 
 async def update_progress(progress_queue, quantity_issued, gift_name):
 
