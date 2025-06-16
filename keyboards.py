@@ -270,12 +270,3 @@ info = InlineKeyboardMarkup(inline_keyboard=[
         InlineKeyboardButton(text="💻 GitHub разработчика", url="https://github.com/Danbesy")
     ]
 ])
-
-send_menu = InlineKeyboardMarkup(inline_keyboard=[
-    [
-        InlineKeyboardButton(text="⚡ Без ссылки на пользователя", callback_data="no_owner")
-    ],
-    [
-        InlineKeyboardButton(text="🔗 С ссылкой на пользователя", callback_data="with_owner")
-    ]
-])
